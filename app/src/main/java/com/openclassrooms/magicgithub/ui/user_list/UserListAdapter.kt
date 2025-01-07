@@ -39,4 +39,18 @@ class UserListAdapter(  // FOR CALLBACK ---
         users = newList
         diffResult.dispatchUpdatesTo(this)
     }
+
+    fun getUsers(): List<User> = users
+
+    fun moveUserToIndex(index: Int, target: Int) {
+        // Remove the user from the list
+        val user = users[index]
+        users = users.filter { it != user }
+        // Split the list in two parts
+        val firstPart = users.subList(0, target)
+        val secondPart = users.subList(target, users.size)
+        // Add the user to the new index
+        users = firstPart + listOf(user) + secondPart
+        notifyItemMoved(index, target)
+    }
 }

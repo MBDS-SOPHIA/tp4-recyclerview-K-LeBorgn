@@ -62,4 +62,13 @@ class UserListInstrumentedTest {
         Espresso.onView(ViewMatchers.withId(R.id.activity_list_user_rv))
             .check(ItemCount(currentUsersSize - 1))
     }
+
+    @Test
+    fun checkIfSwipeIsWorking() {
+        // Effectue un swipe sur le premier élément
+        Espresso.onView(ViewMatchers.withId(R.id.activity_list_user_rv))
+            .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.swipeRight()))
+        val user = getRepository().getUsers()[0]
+        assert(!user.active)
+    }
 }

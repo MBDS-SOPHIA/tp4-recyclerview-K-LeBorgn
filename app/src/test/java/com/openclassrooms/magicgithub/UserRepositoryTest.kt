@@ -50,6 +50,13 @@ class UserRepositoryTest {
     }
 
     @Test
+    fun newUserShouldBeActive() {
+        userRepository.addRandomUser()
+        val user = userRepository.getUsers().last()
+        assertTrue(user.active)
+    }
+
+    @Test
     fun deleteUserWithSuccess() {
         val userToDelete = userRepository.getUsers()[0]
         userRepository.deleteUser(userToDelete)
